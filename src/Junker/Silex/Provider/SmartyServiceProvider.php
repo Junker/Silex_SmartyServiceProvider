@@ -17,12 +17,12 @@
  * ========================================================================
  */
 
-namespace FractalizeR\Smarty;
+namespace Junker\Silex\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class ServiceProvider implements ServiceProviderInterface {
+class SmartyServiceProvider implements ServiceProviderInterface {
     public function register(Application $app) {
         $app['smarty'] = $app->share(function () use ($app) {
                 if (!class_exists('Smarty') and !isset ($app['smarty.dir'])) {
