@@ -15,7 +15,7 @@
 	"autoload": {
             "psr-0": { "FractalizeR\\Smarty": "src/" },
             "files": [
-            	"smarty_functions.php",
+            	"smarty_functions.php"
             ]
     	}
 }
