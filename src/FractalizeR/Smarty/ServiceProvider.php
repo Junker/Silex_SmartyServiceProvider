@@ -49,6 +49,17 @@ class ServiceProvider implements ServiceProviderInterface {
 
                 return $smarty;
             });
+
+        $app['smarty.new_instance'] = $app->protect(function() use ($app) {
+            $smarty = new \Smarty();
+
+            if (isset($app["smarty.options"])) {
+                foreach ($app['smarty.options'] as $smartyOptionName => $smartyOptionValue)
+                    $smarty->$smartyOptionName = $smartyOptionValue;
+            }
+
+            return $smarty;
+        });
     }
     public function boot(Application $app)
     {
