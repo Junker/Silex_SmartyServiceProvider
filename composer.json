@@ -1,5 +1,5 @@
 {
-	"name": "junker/smartyprovider",
+	"name": "junker/smarty-service-provider",
 	"type": "library",
 	"keywords": ["silex", "extension", "silex-extension", "smarty"],
 	"license": "MIT",
