@@ -59,6 +59,13 @@ function smarty_function_transChoice($params, &$smarty)
 	return $app['translator']->transChoice($name, $count, $params, $domain, $locale);
 }
 
+function smarty_block_trans($params, $content, &$smarty, &$repeat)
+{
+	$app = $smarty->getTemplateVars('app');
+
+	return $app->trans($content);
+}
+
 function path($params, &$smarty, $absolute = FALSE)
 {
 	$app = $smarty->getTemplateVars('app');
