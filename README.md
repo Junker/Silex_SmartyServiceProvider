@@ -28,7 +28,7 @@ Registering
 Make sure you place a copy of [Smarty] (http://www.smarty.net) in the ``vendor/Smarty`` directory:
 
 ```php
-use FractalizeR\Smarty\ServiceProvider as SmartyServiceProvider;
+use Junker\Silex\Provider\SmartyServiceProvider;
 define('SMARTY_PATH', __DIR__ . '/../../../../vendor/Smarty');
         
 $app->register(new SmartyServiceProvider(), array(
@@ -52,10 +52,13 @@ The Smarty provider provides a ``smarty`` service:
 
 ```php
 $app->get('/hello/{name}', function ($name) use ($app) {
-    return $app['smarty']->display('hello.tpl', array(
+    return $app['smarty']->display('hello.tpl', [
         'name' => $name,
-    ));
+    ]);
 });
+
+$smarty2 = $app['smarty.new_instance']();
+
 ```
 
 This will render a file named ``hello.tpl`` in the configured templates folder you passed in ``smarty.options``.
@@ -66,4 +69,42 @@ So you can access any services from within your view. For example to access
 
 ```
 {$app.request->getHost()}
+```
+
+Traits
+```php
+class Application extends \Silex\Application
+{
+	use \Junker\Silex\Application\SmartyTrait;
+}
+
+$app->render('hello.tpl', [
+        'name' => $name,
+    ]);
+
+
+Template usage
+--------------
+```smarty
+{path _name='app.login'}
+same as $app['url_generator']->generate('app.login');
+
+{path _name='app.product' id=11}
+same as $app['url_generator']->generate('app.product', ['id' => 11]);
+
+{url _name='app.login'}
+same as $app['url_generator']->generate('app.login', UrlGeneratorInterface::ABSOLUTE_URL);
+
+{trans _name='err.access_forbidden'}
+same as $app['translator']->trans('err.access_forbidden');
+
+{trans _name='warn.my_city' city='London'}
+same as $app['translator']->trans('warn.my_city', ['%city%' => 'London']);
+
+{trans}hello{/trans}
+same as $app['translator']->trans('hello');
+
+{transChoice _name='days' _count=5}
+same as $app['translator']->transChoice('days', 5, ['%count%' => 5]);
+
 ```
