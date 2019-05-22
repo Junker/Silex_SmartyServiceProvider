@@ -57,7 +57,6 @@ $app->get('/hello/{name}', function ($name) use ($app) {
     ]);
 });
 
-$smarty2 = $app['smarty.new_instance']();
 
 ```
 
@@ -71,7 +70,12 @@ So you can access any services from within your view. For example to access
 {$app.request->getHost()}
 ```
 
-Traits
+Get new smarty instance with same smarty.options:
+```php
+$smarty2 = $app['smarty.new_instance']();
+```
+
+Traits:
 ```php
 class Application extends \Silex\Application
 {
@@ -81,7 +85,7 @@ class Application extends \Silex\Application
 $app->render('hello.tpl', [
         'name' => $name,
     ]);
-
+```
 
 Template usage
 --------------
