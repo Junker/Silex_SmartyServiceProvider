@@ -22,6 +22,12 @@ Services
 
 * **smarty**: The ``Smarty`` instance. The main way of interacting with Smarty.
 
+Installation
+------------
+The best way to install Smarty Trait is to use a [Composer](https://getcomposer.org/download):
+
+    composer require junker/smarty-service-provider
+
 Registering
 -----------
 
