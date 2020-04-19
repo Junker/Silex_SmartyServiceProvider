@@ -21,6 +21,8 @@ namespace Junker\Silex\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Junker\Silex\Smarty;
+
 
 class SmartyServiceProvider implements ServiceProviderInterface {
     public function register(Application $app) {
@@ -32,8 +34,8 @@ class SmartyServiceProvider implements ServiceProviderInterface {
                 if (!class_exists('Smarty') and isset ($app['smarty.dir'])) {
                     require_once($app['smarty.dir'] . '/libs/Smarty.class.php');
                 }
-                
-                $smarty = isset($app['smarty.instance']) ? $app['smarty.instance'] : new \Smarty();
+
+                $smarty = isset($app['smarty.instance']) ? $app['smarty.instance'] : new Smarty();
 
                 if (isset($app["smarty.options"])) {
                     foreach ($app["smarty.options"] as $smartyOptionName => $smartyOptionValue) {
@@ -42,6 +44,7 @@ class SmartyServiceProvider implements ServiceProviderInterface {
                 }
 
                 $smarty->assign("app", $app);
+                $smarty->app = $app;
 
                 if (isset($app['smarty.configure'])) {
                     $app['smarty.configure']($smarty);
