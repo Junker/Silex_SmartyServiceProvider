@@ -54,7 +54,7 @@ class SmartyServiceProvider implements ServiceProviderInterface {
             });
 
         $app['smarty.new_instance'] = $app->protect(function() use ($app) {
-            $smarty = new \Smarty();
+            $smarty = new Smarty();
 
             if (isset($app["smarty.options"])) {
                 foreach ($app['smarty.options'] as $smartyOptionName => $smartyOptionValue)
