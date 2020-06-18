@@ -19,14 +19,14 @@
 
 namespace Junker\Silex\Provider;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Junker\Silex\Smarty;
 
 
 class SmartyServiceProvider implements ServiceProviderInterface {
-    public function register(Application $app) {
-        $app['smarty'] = $app->share(function () use ($app) {
+    public function register(Container $app) {
+        $app['smarty'] = function ($app) {
                 if (!class_exists('Smarty') and !isset ($app['smarty.dir'])) {
                     throw new \RuntimeException("Smarty class is not loaded and 'smarty.dir' is not defined. Please provide this option to Application->register() call.");
                 }
@@ -51,7 +51,7 @@ class SmartyServiceProvider implements ServiceProviderInterface {
                 }
 
                 return $smarty;
-            });
+            };
 
         $app['smarty.new_instance'] = $app->protect(function() use ($app) {
             $smarty = new Smarty();
@@ -67,8 +67,4 @@ class SmartyServiceProvider implements ServiceProviderInterface {
             return $smarty;
         });
     }
-    public function boot(Application $app)
-    {
-    }
 }
-
