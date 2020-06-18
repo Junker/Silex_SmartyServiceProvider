@@ -77,8 +77,9 @@ function path($params, &$smarty, $absolute = FALSE)
 	}
 	else
 	{
-		$name = $app['request']->attributes->get('_route');
-		$params = array_merge(array_merge($app['request']->attributes->get('_route_params'), $app['request']->query->all(), $params));
+		$request = $app['request_stack']->getCurrentRequest();
+		$name = $request->attributes->get('_route');
+		$params = array_merge(array_merge($request->attributes->get('_route_params'), $request->query->all(), $params));
 	}
 
 	if (isset($params['_params']))
