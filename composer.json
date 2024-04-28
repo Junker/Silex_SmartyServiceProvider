@@ -6,8 +6,8 @@
 	"description": "Smarty service provider for silex",
 	"homepage": "https://github.com/junker/Silex_SmartyServiceProvider.git",
 	"require": {
-	    "php": ">=5.3.2",
-	    "smarty/smarty": "3.1.*@dev"
+	    "php": ">=7.1.0",
+	    "smarty/smarty": "^4.5"
 	 },
 	"require-dev": {
 	    "silex/silex": "~2.0"
